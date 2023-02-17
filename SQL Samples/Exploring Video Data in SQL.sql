@@ -1,8 +1,8 @@
 /*
 QUESTIONS
 
-1. What are the most watched TV shows and Movies. Sorted by total watch time, seperated by type.
-2. Which viewer IDs watched the most amount of video content by total watch time and total unique videos watched.
+1. What are the most watched TV shows and Movies? Sorted by total watch time, seperated by type.
+2. Which viewer IDs watched the most amount of video content by total watch time and total unique videos watched?
 3. Which country's users (use country name) have the highest total watch time across all videos?
 4. Does the total number of unique viewers impact the total watch time of a video?
 5. What is the average watch time for each video?
