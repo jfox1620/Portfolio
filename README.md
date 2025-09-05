@@ -11,7 +11,7 @@ An analysis of up-to-date data on powerlifting competition meets. Data is pulled
   + [Jupyter Notebook](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/Powerlifting_EDA.ipynb)
   + [Power BI Report](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/Open_Powerlifting_Insights.pdf)
 
-### [Open Powerlifting Exploratory Data Analysis](https://github.com/jfox1620/Portfolio/tree/main/Powerlifting%20Exploratory%20Analysis)
+### [Power BI Samples](https://github.com/jfox1620/Portfolio/tree/main/Power%20BI%20Samples)
 
 This is a very small collection of some reports I have personally developed during my time at San Joaquin County Probation. This does not include any reports that I oversaw my team develop. More dashboards are viewable on the SJC Probation [official website](https://sjcprobation.org/probation-data-dashboards).
 
