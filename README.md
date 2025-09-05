@@ -13,12 +13,12 @@ An analysis of up-to-date data on powerlifting competition meets. Data is pulled
 
 ### [Open Powerlifting Exploratory Data Analysis](https://github.com/jfox1620/Portfolio/tree/main/Powerlifting%20Exploratory%20Analysis)
 
-This is a very small collection of some reports I have personally developed during my time at San Joaquin County Probation. This does not include any reports that I oversaw my team develop. More dashboards are viewable on the [official website](https://sjcprobation.org/probation-data-dashboards)
+This is a very small collection of some reports I have personally developed during my time at San Joaquin County Probation. This does not include any reports that I oversaw my team develop. More dashboards are viewable on the SJC Probation [official website](https://sjcprobation.org/probation-data-dashboards).
 
-  +[Adult Recidivism](https://github.com/jfox1620/Portfolio/blob/main/Power%20BI%20Samples/Adult%20Recidivism.pdf)
-  +[Adult Workload Stats](https://github.com/jfox1620/Portfolio/blob/main/Power%20BI%20Samples/Adult%20Workload%20Stats.pdf)
-  +[Pretrial Metrics & Trends](https://github.com/jfox1620/Portfolio/blob/main/Power%20BI%20Samples/Pretrial%20Metrics%20&%20Trends.pdf)
-  +[Positions Report](https://github.com/jfox1620/Portfolio/blob/main/Power%20BI%20Samples/Positions%20Report.pdf)
+  + [Adult Recidivism](https://github.com/jfox1620/Portfolio/blob/main/Power%20BI%20Samples/Adult%20Recidivism.pdf)
+  + [Adult Workload Stats](https://github.com/jfox1620/Portfolio/blob/main/Power%20BI%20Samples/Adult%20Workload%20Stats.pdf)
+  + [Pretrial Metrics & Trends](https://github.com/jfox1620/Portfolio/blob/main/Power%20BI%20Samples/Pretrial%20Metrics%20&%20Trends.pdf)
+  + [Positions Report](https://github.com/jfox1620/Portfolio/blob/main/Power%20BI%20Samples/Positions%20Report.pdf)
 
 ### [SQL Samples](https://github.com/jfox1620/Portfolio/tree/main/SQL%20Samples)
 
