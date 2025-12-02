@@ -15,8 +15,12 @@ The first comprehensive analytical evaluation I designed and developed for the S
 
 I conducted an A/B-style analysis of pretrial release decisions using chi-squared testing to compare FTA rates, while cleaning and visualizing demographic and risk score data to reveal actionable policy insights.
 
-+ [Jupyter Notebook](https://github.com/jfox1620/Portfolio/blob/main/AB%20Test%20-%20Pretrial%20Court%20Appearance%20Rates%20by%20Judicial%20Release%20Decision/FTARatesABTest.ipynb)
 + [Report](https://github.com/jfox1620/Portfolio/blob/main/AB%20Test%20-%20Pretrial%20Court%20Appearance%20Rates%20by%20Judicial%20Release%20Decision/Pretrial%20Court%20Appearance%20Rates%20by%20Judicial%20Decision%20(2020%E2%80%932024).docx)
++ [Jupyter Notebook](https://github.com/jfox1620/Portfolio/blob/main/AB%20Test%20-%20Pretrial%20Court%20Appearance%20Rates%20by%20Judicial%20Release%20Decision/FTARatesABTest.ipynb)
+
+### [Machine Learning Model - Probationer Success](https://github.com/jfox1620/Portfolio/blob/main/Machine%20Learning%20Model%20-%20Probationer%20Success/ProbationSuccessModeler.ipynb)
+
+In this project I developed a machine learning model to predict probation outcomes using natural language processing on case notes, enabling identification of individuals at higher risk of non-compliance.
 
 ### [Open Powerlifting Exploratory Data Analysis](https://github.com/jfox1620/Portfolio/tree/main/Powerlifting%20Exploratory%20Analysis)
 
