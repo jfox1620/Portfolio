@@ -3,7 +3,7 @@
 ---
 This repository is a portfolio of data analytics projects I've completed to serve as a showcase of my skills.
 
-### [Etsy Shop Data Pipeline](https://github.com/jfox1620/Portfolio/tree/main/Etsy%20Shop%20Data%20Pipeline/Etsy_Shop_Data_Pipeline.py)
+### [Etsy Shop Data Pipeline](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/Etsy_Gelato_Data_Pipeline.py)
 
 This project is an end-to-end ETL pipeline that pulls receipts, transactions, and fulfillment data from my Etsy shop and Gelato print-on-demand accounts via APIs and loads them into Databricks SQL. It normalizes complex JSON into analytics-ready tables and performs full table replacement for consistent, deterministic outputs. The pipeline showcases production-style engineering practices: including modular design, clear task boundaries, and robust documentation while running entirely in Databricks Community Edition, wherein it is run on a daily job schedule to keep data up-to-date and available for analytics.
 
