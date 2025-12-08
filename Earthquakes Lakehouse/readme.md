@@ -7,35 +7,32 @@ It ingests real-time earthquake data from the USGS API, lands the raw JSON into 
 
 The goal is to show understanding of modern data engineering fundamentals, including:
 + Architecture & Pipeline Design
- + Bronze → Silver → Gold medallion architecture
- + Modular notebook pipeline design
- + Metadata tracking framework
- + Incremental loads
+  * Bronze → Silver → Gold medallion architecture
+  * Modular notebook pipeline design
+  * Metadata tracking framework
+  * Incremental loads
 + PySpark Data Engineering
- + DataFrame transformations
- + JSON parsing & normalization
- + Schema management
+  * DataFrame transformations
+  * JSON parsing & normalization
+  * Schema management
 + Delta Lake Capabilities
- + MERGE INTO and Overwrite-by-Partition Upserts
- + Z-ORDER optimization
- + Time Travel queries
+  * MERGE INTO and Overwrite-by-Partition Upserts
+  * Z-ORDER optimization
+  * Time Travel queries
 + Data Quality & Reliability
- + Parsing and error-tolerant ingestion
- + Normalization of nested/semi-structured data
+  * Parsing and error-tolerant ingestion
+  * Normalization of nested/semi-structured data
 
 ________________________________________
 
 ## Data Source
 
-(USGS Earthquake GeoJSON Feed (Past 30 days))[https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php]
+[USGS Earthquake GeoJSON Feed](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
 
-API used:
-+	Past Hour All Earthquakes
++	All Earthquakes past hour
 +	Updated every minute
 +	Returns 60–120 recent earthquakes
 +	Endpoint returns JSON containing earthquake metadata, geometry, and properties
-
-The pipeline pulls this JSON, normalizes it, and outputs high-value tables used for analysis.
 
 ________________________________________
 
