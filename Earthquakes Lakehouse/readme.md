@@ -3,7 +3,7 @@
 ## Project Overview
 
 This project demonstrates a full production-grade lakehouse pipeline using PySpark and Delta Lake in Databricks.
-It ingests real-time earthquake data from the USGS API, lands the raw JSON into a structured [Bronze]() → [Silver]() → [Gold]() architecture, and produces analytical tables suitable for dashboards, reporting, and machine learning.
+It ingests real-time earthquake data from the USGS API, lands the raw JSON into a structured [Bronze](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/01_bronze_ingest.py) -> [Silver](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/02_silver_cleaning.py) -> [Gold](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/03_gold_analytics.py) architecture, and produces analytical tables suitable for dashboards, reporting, and machine learning.
 
 The goal is to show understanding of modern data engineering fundamentals, including:
 + Architecture & Pipeline Design
@@ -46,17 +46,17 @@ ________________________________________
 
 ## Key Features Demonstrated
 
-+ Bronze Layer — Raw Landing (Append-Only)
++ [Bronze Layer](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/01_bronze_ingest.py) — Raw Landing (Append-Only)
   *	Stores raw API response
   *	Adds ingest_timestamp
   *	No transformations (audit-ready)
-+ Silver Layer — Standardization & Normalization
++ [Silver Layer](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/02_silver_cleaning.py) — Standardization & Normalization
   *	Parses nested JSON (properties, geometry)
   *	Converts epoch milliseconds to proper timestamps
   *	Extracts event_date
   *	Normalizes text fields
   *	Ensures schema consistency
-+ Gold Layer — Analytics Tables
++ [Gold Layer](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/03_gold_analytics.py) — Analytics Tables
   + Gold Table 1 — Daily Summary
     *	Aggregate data (daily count, average/max magnitude, etc.)
     * Partitioned by event_date for fast reads.
