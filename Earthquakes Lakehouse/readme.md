@@ -3,7 +3,7 @@
 ## Project Overview
 
 This project demonstrates a full production-grade lakehouse pipeline using PySpark and Delta Lake in Databricks.
-It ingests real-time earthquake data from the USGS API, lands the raw JSON into a structured Bronze → Silver → Gold architecture, and produces analytical tables suitable for dashboards, reporting, and machine learning.
+It ingests real-time earthquake data from the USGS API, lands the raw JSON into a structured [Bronze]() → [Silver]() → [Gold]() architecture, and produces analytical tables suitable for dashboards, reporting, and machine learning.
 
 The goal is to show understanding of modern data engineering fundamentals, including:
 + Architecture & Pipeline Design
@@ -87,9 +87,9 @@ ________________________________________
 ```bash
 /
 ├── notebooks/
-│   ├── 01_bronze_ingest.ipynb
-│   ├── 02_silver_transform.ipynb
-│   ├── 03_gold_tables.ipynb
+│   ├── 01_bronze_ingest.py
+│   ├── 02_silver_transform.py
+│   ├── 03_gold_tables.py
 │
 ├── README.md  ← (this file)
 │── architecture.png
