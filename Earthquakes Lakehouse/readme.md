@@ -5,15 +5,23 @@
 This project demonstrates a full production-grade lakehouse pipeline using PySpark and Delta Lake in Databricks.
 It ingests real-time earthquake data from the USGS API, lands the raw JSON into a structured Bronze → Silver → Gold architecture, and produces analytical tables suitable for dashboards, reporting, and machine learning.
 
-The goal is to show mastery of modern data engineering fundamentals, including:
-+ Bronze/Silver/Gold medallion architecture
-+ Incremental processing
-+	Schema management
-+	Merge vs. Overwrite-by-Partition
-+	Incremental metadata tracking
-+	Z-ORDER optimization
-+	Time Travel
-+	Data quality handling (parsing, normalization, error handling)
+The goal is to show understanding of modern data engineering fundamentals, including:
++ Architecture & Pipeline Design
+ + Bronze → Silver → Gold medallion architecture
+ + Modular notebook pipeline design
+ + Metadata tracking framework
+ + Incremental loads
++ PySpark Data Engineering
+ + DataFrame transformations
+ + JSON parsing & normalization
+ + Schema management
++ Delta Lake Capabilities
+ + MERGE INTO and Overwrite-by-Partition Upserts
+ + Z-ORDER optimization
+ + Time Travel queries
++ Data Quality & Reliability
+ + Parsing and error-tolerant ingestion
+ + Normalization of nested/semi-structured data
 
 ________________________________________
 
@@ -51,7 +59,6 @@ ________________________________________
   *	Extracts event_date
   *	Normalizes text fields
   *	Ensures schema consistency
-  *	Removes malformed entries gracefully
 + Gold Layer — Analytics Tables
   + Gold Table 1 — Daily Summary
     *	Aggregate data (daily count, average/max magnitude, etc.)
@@ -92,16 +99,3 @@ ________________________________________
 └── requirements.txt
 ```
 ________________________________________
-
-## Skills Demonstrated
-
-This project shows proficiency in:
-+	PySpark (DataFrames, Window functions, JSON processing)
-+	Delta Lake (MERGE, OPTIMIZE, ZORDER, Time Travel)
-+	Medallion Architecture
-+	Incremental & partition-aware processing
-+	Data quality handling
-+	Real-time data ingestion simulation
-+	Metadata frameworks
-+	Designing pipeline notebooks
-
