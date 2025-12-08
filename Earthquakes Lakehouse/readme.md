@@ -80,6 +80,7 @@ ________________________________________
 
 ## Repository Structure
 
+```bash
 /
 ├── notebooks/
 │   ├── 01_bronze_ingest.ipynb
@@ -89,7 +90,7 @@ ________________________________________
 ├── README.md  ← (this file)
 │── architecture.png
 └── requirements.txt
-
+```
 ________________________________________
 
 ## Skills Demonstrated
