@@ -349,6 +349,10 @@ for gold_table, df_gold in gold_ready_dfs.items():
         # fallback: take max ingest_timestamp from silver
         last_ts = new_gold_data[gold_table].agg(F.max("ingest_timestamp")).collect()[0][0]
 
+    # Get current version of the gold Delta table
+    delta_gold = DeltaTable.forName(spark, gold_table)
+    current_version = delta_gold.history(1).select("version").collect()[0][0]
+    
     spark.sql(f"""
         MERGE INTO {metadata_table} AS meta
         USING (

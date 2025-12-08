@@ -31,6 +31,7 @@ from pyspark.sql import functions as F
 from pyspark.sql import Row
 from pyspark.sql.types import MapType, StringType, ArrayType
 from delta.tables import DeltaTable
+from pyspark.sql import Window
 import json
 import pandas as pd
 
@@ -212,6 +213,16 @@ df_flat = (
     .withColumn("updated", F.from_unixtime(F.col("updated") / 1000).cast("timestamp"))
 )
 
+window = Window.partitionBy("id").orderBy(F.col("updated").desc())
+
+# There shouldn't be any duplicates, but remove any just in case, keeping the most recently updated record.
+df_flat = (
+    df_flat
+    .withColumn("row_num", F.row_number().over(window))
+    .filter(F.col("row_num") == 1)
+    .drop("row_num")
+)
+
 # COMMAND ----------
 
 # -------------------------------
@@ -246,13 +257,11 @@ print(f"Upserted {df_flat.count()} Silver records.")
 # STEP 7: Read it back
 # -------------------------------
 
-df_bronze_recent = spark.table(bronze_table)[
-    ["ingest_timestamp", substring("raw_geojson", 1, 500).alias("raw_geojson_preview")]
-].orderBy(
+df_silver_recent = spark.table(silver_table).orderBy(
     F.col("ingest_timestamp").desc()
-).limit(1)
+).limit(10)
 
-display(df_bronze_recent)
+display(df_silver_recent)
 
 # COMMAND ----------
 
@@ -261,6 +270,14 @@ display(df_bronze_recent)
 # -------------------------------
 
 max_ingest_ts = df_new.agg(F.max("ingest_timestamp")).first()[0]
+
+# Get current version of the silver Delta table
+delta_silver = DeltaTable.forName(spark, silver_table)
+current_version = (
+    delta_silver.history(1)
+    .select("version")
+    .first()[0]
+)
 
 spark.sql(f"""
 MERGE INTO {metadata_table} AS meta
