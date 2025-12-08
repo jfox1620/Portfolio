@@ -198,7 +198,7 @@ print(f"Upserted {df_flat.count()} Silver records.")
 # COMMAND ----------
 
 # -------------------------------
-# STEP 3: Read it back
+# STEP 7: Read it back
 # -------------------------------
 
 df_bronze_recent = spark.table(bronze_table)[
@@ -212,7 +212,7 @@ display(df_bronze_recent)
 # COMMAND ----------
 
 # -------------------------------
-# STEP 7: Update metadata
+# STEP 8: Update metadata
 # -------------------------------
 
 max_ingest_ts = df_new.agg(F.max("ingest_timestamp")).first()[0]
