@@ -3,10 +3,10 @@
 ---
 This repository is a portfolio of data analytics projects I've completed to serve as a showcase of my skills.
 
-### [USGS Earthquakes Lakehouse Pipeline](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/readme.md)
+### [USGS Earthquakes Lakehouse Pipeline](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/README.md)
 This project demonstrates a full production-grade lakehouse pipeline using PySpark and Delta Lake in Databricks. It ingests real-time earthquake data from the USGS API, lands the raw JSON into a structured Bronze-Silver-Gold architecture, and produces analytical tables suitable for dashboards, reporting, and machine learning.
 
-### [Etsy Shop Data Pipeline](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/readme.md)
+### [Etsy Shop Data Pipeline](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/README.md)
 
 This project is an end-to-end ETL pipeline that pulls receipts, transactions, and fulfillment data from my Etsy shop and Gelato print-on-demand accounts via APIs and loads them into Databricks SQL. It normalizes complex JSON into analytics-ready tables and performs full table replacement for consistent, deterministic outputs. The pipeline showcases production-style engineering practices: including modular design, clear task boundaries, and robust documentation while running entirely in Databricks Community Edition, wherein it is run on a daily job schedule to keep data up-to-date and available for analytics.
 
