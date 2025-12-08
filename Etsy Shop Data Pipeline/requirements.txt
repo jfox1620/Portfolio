@@ -1,0 +1,11 @@
+# Core pipeline dependencies
+requests==2.32.3
+requests-oauthlib==2.0.0
+pyodbc==5.2.0
+databricks-sql-connector==4.2.1
+databricks-sdk==0.49.0
+pyspark==4.0.0+databricks.connect.17.2.2
+python-dateutil==2.9.0.post0
+
+# Optional (for scheduling/orchestration if running locally)
+prefect==2.10.3
