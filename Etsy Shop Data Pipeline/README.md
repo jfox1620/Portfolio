@@ -23,13 +23,13 @@ The pipeline is written entirely in a Databricks Community Edition (CE) notebook
 
 This project serves as a portfolio example of designing a reliable, well-structured data pipeline under real constraints, emphasizing clarity, maintainability, and production-minded engineering even in a notebook environment.
 
-``` bash
-etsy-gelato-pipeline/
+
+## Repository Structure
+
+```bash
+/
 │
-├─ README.md                # Project description (what you have now)
-├─ etsy_gelato_pipeline.ipynb   # Databricks notebook
-├─ requirements.txt         # Optional
-├─ docs/                    # Optional, e.g., architecture diagrams
-│   └─ architecture.png
-└─ data/                    # Optional, simulated sample data if needed
+├─ README.md
+├─ Etsy_Gelato_Data_Pipeline.py
+├─ requirements.txt
 ```
