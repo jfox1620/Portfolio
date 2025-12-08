@@ -1,18 +1,38 @@
 # Databricks notebook source
-# ===============================
-# SILVER PIPELINE: USGS EARTHQUAKES
-# ===============================
+"""
+Silver Layer USGS Earthquake Data Transformation
+--------------------------------------
 
+This notebook processes raw Bronze-layer GeoJSON into clean, structured, analytics-ready Silver data. It incrementally loads new Bronze records using the metadata table, explodes the GeoJSON features array, and applies normalization to produce a flattened earthquake event schema.
+
+Key responsibilities:
+- Detect and load only new Bronze ingestions (incremental processing)
+- Extract and explode GeoJSON "features" into individual earthquake events
+- Flatten nested geometry and properties fields
+- Convert epoch millisecond timestamps to proper Spark timestamps
+- Upsert cleaned records into the Silver Delta table (MERGE INTO)
+- Update pipeline metadata for downstream incremental loads
+- Perform optional VACUUM retention on Silver data
+
+Outputs:
+- Delta table: `silver_earthquakes`
+- Delta table: `pipeline_metadata`
+
+The Silver layer produces a normalized, deduplicated event-level dataset that serves as the reliable source for all downstream Gold aggregations.
+"""
+
+# COMMAND ----------
+
+# -------------------------------
+# CONFIG
+# -------------------------------
+ 
 from pyspark.sql import functions as F
 from pyspark.sql import Row
 from pyspark.sql.types import MapType, StringType, ArrayType
 from delta.tables import DeltaTable
 import json
 import pandas as pd
-
-# -------------------------------
-# CONFIG
-# -------------------------------
 
 bronze_table = "bronze_earthquakes"
 silver_table = "silver_earthquakes"
@@ -64,6 +84,18 @@ else:
 # -------------------------------
 
 def extract_features(raw_json_str):
+    """
+    Extract the list of earthquake feature objects from a raw USGS JSON payload.
+
+    This function receives a raw JSON string from the Bronze table, parses it, retrieves the "features" array, and returns each feature as its own JSON string. If the payload cannot be parsed, an empty list is returned.
+
+    Args:
+        raw_json_str (str): Raw JSON string containing the USGS GeoJSON response.
+
+    Returns:
+        list[str]: A list of JSON-formatted strings, each representing a single earthquake feature. Returns an empty list if parsing fails.
+    """
+
     try:
         data = json.loads(raw_json_str)
         features = data.get("features", [])
@@ -90,6 +122,19 @@ df_features = (
 # -------------------------------
 
 def flatten_feature(batch_iter):
+    """
+    Convert a single USGS GeoJSON feature into a flat dictionary suitable for Spark ingestion.
+
+    This function extracts the nested 'properties' and 'geometry' fields, renames certain keys, and normalizes the structure into a flattened dictionary of simple key/value pairs.
+
+    Args:
+        feature (dict): Raw USGS feature object from the GeoJSON feed.
+
+    Returns:
+        dict: A flattened earthquake record with keys such as:
+              id, time, mag, place, depth, longitude, latitude, etc.
+    """
+
     for pdf in batch_iter:
         rows = []
 

@@ -1,7 +1,29 @@
 # Databricks notebook source
-# ===============================
-# BRONZE PIPELINE: USGS EARTHQUAKES
-# ===============================
+"""
+Bronze Layer USGS Earthquake Data Ingestion
+--------------------------------
+
+This notebook ingests raw earthquake data from the USGS GeoJSON API and stores it in a Delta Lake Bronze table without applying any transformations. The Bronze layer serves as the immutable source of truth for downstream processing.
+
+Key responsibilities:
+- Requests the live USGS “past hour” GeoJSON feed.
+- Stores the full raw JSON payload along with an ingest timestamp.
+- Appends data into the `bronze_earthquakes` Delta table.
+- Updates the `pipeline_metadata` table with the latest ingest time.
+- Displays a preview of the most recent raw record.
+
+Outputs:
+- Delta table: `bronze_earthquakes`
+- Delta table: `pipeline_metadata`
+
+The Bronze layer enables incremental processing, auditability, and reliable downstream parsing in the Silver and Gold stages.
+"""
+
+# COMMAND ----------
+
+# -------------------------------
+# CONFIG
+# -------------------------------
 
 import requests
 import json
@@ -10,11 +32,6 @@ from pyspark.sql import Row
 from pyspark.sql import functions as F
 from pyspark.sql.types import StructType, StructField, StringType, DoubleType, LongType, ArrayType
 from pyspark.sql.functions import substring
-
-
-# -------------------------------
-# CONFIG
-# -------------------------------
 
 bronze_table = "bronze_earthquakes"
 metadata_table = "pipeline_metadata"

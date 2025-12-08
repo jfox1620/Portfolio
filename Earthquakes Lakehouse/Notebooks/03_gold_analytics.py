@@ -1,7 +1,34 @@
 # Databricks notebook source
-# ===============================
-# GOLD PIPELINE: USGS EARTHQUAKES
-# ===============================
+"""
+Gold Layer USGS Earthquake Data Analytics
+------------------------------------
+
+This notebook produces business-ready Gold datasets from the cleaned Silver earthquake events. It applies a 7-day lookback to capture late-arriving data, runs table-specific transformations, and writes results using either partition-overwrite (aggregated tables) or MERGE-based upserts (event-level tables). The Gold layer serves as the final analytical output for reporting, dashboards, and downstream data products.
+
+Key responsibilities:
+- Incrementally load Silver data using a 7-day lookback window
+- Apply table-specific transformation functions
+- Write Gold tables via either partition overwrite or MERGE INTO on key columns
+- Apply Z-Order optimization for event-level performance
+- Update metadata to track the last processed ingest_timestamp
+- Perform optional VACUUM retention on Gold data
+
+Outputs:
+- Delta table: `gold_earthquakes_daily_summary`
+   - Daily aggregates: counts, magnitude stats, depth stats, significance stats  
+   - Computes the most active region per day using a window function  
+- Delta table: `gold_earthquakes_big`
+   - Event-level table of magnitude ≥ 5 earthquakes  
+   - Parses the “place” field into region, distance_from_region, and direction_from_region
+
+The Gold layer contains clean, high-value datasets purpose-built for analytics and real-time insights.
+"""
+
+# COMMAND ----------
+
+# -------------------------------
+# CONFIG
+# -------------------------------
 
 from pyspark.sql import functions as F
 from pyspark.sql import Row
@@ -11,10 +38,6 @@ from pyspark.sql.window import Window
 from delta.tables import DeltaTable
 import json
 import pandas as pd
-
-# -------------------------------
-# CONFIG
-# -------------------------------
 
 silver_table = "silver_earthquakes"
 gold_table_1 = "gold_earthquakes_daily_summary"
