@@ -133,6 +133,13 @@ fig = px.scatter_geo(
     height=700
 )
 
+# Improve date label readability
+fig.update_xaxes(
+    tickangle=45,
+    nticks=10,
+    tickformat="%Y-%m-%d"
+)
+
 # Save figure as HTML
 fig.write_html(
     "earthquake_map.html",
@@ -140,3 +147,6 @@ fig.write_html(
 )
 
 display(fig)
+
+# COMMAND ----------
+
