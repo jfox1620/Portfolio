@@ -51,6 +51,19 @@ metadata_table = "pipeline_metadata"
 # -------------------------------
 
 def get_last_ingest_ts(table_name, metadata_table):
+    """
+    Retrieve the most recent ingestion timestamp for a specified Delta table.
+
+    This function queries a metadata tracking table to determine the last time a given Delta table was updated. It is useful for implementing incremental data processing and ensuring only new or updated records are processed.
+
+    Args:
+        table_name (str): Name of the Delta table to check.
+        metadata_table (str): Name of the metadata tracking table containing ingestion timestamps.
+
+    Returns:
+        datetime or None: The most recent ingestion timestamp for the specified table, or None if the table has not been ingested yet.
+    """
+
     rows = spark.sql(f"""
         SELECT last_ingest_ts
         FROM {metadata_table}
@@ -126,9 +139,8 @@ def transform_gold_table_1(df):
 
     Additional notes:
     - Input DataFrame must have at least the following columns:
-      'time' (timestamp in ms), 'mag', 'depth', 'sig', 'place'
+        'time' (timestamp in ms), 'mag', 'depth', 'sig', 'place'
     - Converts 'time' to 'event_date' internally if not already present
-    - Output DataFrame is ready to write to a Gold table, partitioned by event_date
 
     Args:
         df (DataFrame): Silver-level earthquakes DataFrame
@@ -189,8 +201,7 @@ def transform_gold_table_2(df):
         df_silver (DataFrame): The Silver-level earthquakes DataFrame with columns including id, longitude, latitude, depth, mag, magType, place, event_date, tsunami, sig, etc.
 
     Returns:
-        DataFrame: Transformed Gold-level DataFrame for high-magnitude earthquakes with relevant, clean data:
-        
+        DataFrame: Transformed Gold-level DataFrame for high-magnitude earthquakes with relevant, clean data
     """
     
     df_summary = (
