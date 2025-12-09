@@ -1,6 +1,6 @@
 # Databricks notebook source
 """
-USGS Earthquakes Visualization Notebook
+USGS Earthquakes Interactive Animation
 
 This notebook extracts recent earthquake data from a Databricks Delta table and generates an interactive visualization to explore earthquake activity over time. The workflow includes:
 
@@ -26,6 +26,7 @@ This notebook extracts recent earthquake data from a Databricks Delta table and 
 Usage:
 - Run each cell sequentially to query, process, and visualize earthquake data.
 - Adjust magnitude threshold or date range as needed for different analyses.
+- Download the HTML file and open to view the animation.
 """
 
 # COMMAND ----------
