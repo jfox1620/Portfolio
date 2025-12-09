@@ -146,7 +146,8 @@ fig.write_html(
     include_plotlyjs="cdn"
 )
 
-display(fig)
+# Display animation
+with open("earthquake_map.html", "r") as f:
+    html_content = f.read()
 
-# COMMAND ----------
-
+displayHTML(html_content)
