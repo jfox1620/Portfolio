@@ -103,13 +103,13 @@ ________________________________________
 
 In addition to the ETL pipeline, this project includes an interactive visualization of earthquake events over time.
 
-+ [Generate Animation Notebook](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/generate_earthquake_animation.py)
++ [Generate Animation Notebook](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/generate_map_animation.py)
   * Generates interactive Folium and Plotly visualizations of recent earthquake activity.
   * Converts the Silver layer earthquake data into GeoJSON features for animation.
   * Folium `TimestampedGeoJson` map for animated timeline view.
   * Plotly `scatter_geo` map for animated daily earthquake locations.
 
-+ [Interactive Map HTML](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/earthquake_map.html)
++ [Interactive Map HTML](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/earthquake_map.html)
   * Fully interactive Plotly map exported as HTML.
   * Can be downloaded and opened in a browser to explore earthquake locations, magnitude, and timelines.
   * Marker size represents earthquake magnitude; animation frames show daily events.
