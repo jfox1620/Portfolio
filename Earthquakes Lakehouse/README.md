@@ -25,6 +25,23 @@ The goal is to show understanding of modern data engineering fundamentals, inclu
 
 ________________________________________
 
+## Repository Structure
+
+```bash
+/
+├── notebooks/
+│   ├── 01_bronze_ingest.py
+│   ├── 02_silver_transform.py
+│   ├── 03_gold_tables.py
+│   ├── generate_map_animation.py
+│
+├── README.md  ← (this file)
+│── architecture.png
+│── requirements.txt
+└── earthquake_map.html
+```
+________________________________________
+
 ## Data Source
 
 [USGS Earthquake GeoJSON Feed](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
@@ -79,20 +96,26 @@ ________________________________________
 + Z-ORDER Optimization
   * Improves locality of data:
     spark.sql("OPTIMIZE gold_earthquakes_mag5_plus ZORDER BY (event_date, region)")
-    
-________________________________________
 
-## Repository Structure
+ ________________________________________
 
-```bash
-/
-├── notebooks/
-│   ├── 01_bronze_ingest.py
-│   ├── 02_silver_transform.py
-│   ├── 03_gold_tables.py
-│
-├── README.md  ← (this file)
-│── architecture.png
-└── requirements.txt
-```
+## Interactive Earthquakes Visualization
+
+In addition to the ETL pipeline, this project includes an interactive visualization of earthquake events over time.
+
++ [Generate Animation Notebook](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/generate_earthquake_animation.py)
+  * Generates interactive Folium and Plotly visualizations of recent earthquake activity.
+  * Converts the Silver layer earthquake data into GeoJSON features for animation.
+  * Folium `TimestampedGeoJson` map for animated timeline view.
+  * Plotly `scatter_geo` map for animated daily earthquake locations.
+
++ [Interactive Map HTML](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/Notebooks/earthquake_map.html)
+  * Fully interactive Plotly map exported as HTML.
+  * Can be downloaded and opened in a browser to explore earthquake locations, magnitude, and timelines.
+  * Marker size represents earthquake magnitude; animation frames show daily events.
+
+**Viewing Notes:**
+- To view the HTML map online, you can use [GitHub Pages](https://pages.github.com/) or [HTML Preview](https://htmlpreview.github.io/) for interactive rendering.
+- Locally, simply download `earthquake_map.html` and open it in a browser.
+
 ________________________________________
