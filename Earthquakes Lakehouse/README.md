@@ -91,11 +91,15 @@ ________________________________________
   *	Overwrite by partition → static daily aggregates
 + Delta Lake Time Travel
   * Rollback, audit, or compare previous versions:
+    ```SQL
     SELECT * FROM gold_earthquakes_daily_summary VERSION AS OF 3;
+    ```
   * Time Travel is referenced in this README only and is not used in the notebooks.
 + Z-ORDER Optimization
   * Improves locality of data:
+    ```python
     spark.sql("OPTIMIZE gold_earthquakes_mag5_plus ZORDER BY (event_date, region)")
+    ```
 
  ________________________________________
 
