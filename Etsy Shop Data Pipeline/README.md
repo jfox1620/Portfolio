@@ -4,6 +4,8 @@ This project is an end-to-end data ingestion pipeline that syncs Etsy shop data 
 
 The pipeline is written entirely in a Databricks Community Edition (CE) notebook and follows a clean, production-style ETL design. Although CE cannot run external orchestrators such as Prefect or Airflow, the code intentionally mirrors typical orchestration structure—clear task boundaries, modular functions, error handling, and deterministic load behavior, making it representative of real workflow engineering practices.
 
+[View the pipeline](./Etsy_Gelato_Data_Pipeline.py)
+
 ### What this project demonstrates
 
 + Practical third-party API integration (Etsy + Gelato)
