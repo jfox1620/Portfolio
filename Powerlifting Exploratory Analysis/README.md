@@ -10,10 +10,10 @@ This project explores historical powerlifting competition results using the Open
 - Generates interactive visualizations and dashboards in Power BI to communicate insights.  
 
 ## Repository Contents
-- `[Powerlifting EDA Notebook](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/Powerlifting_EDA.ipynb)` — Jupyter Notebook with full analysis and visualizations  
-- `[Power BI Report](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/Open_Powerlifting_Insights.pdf)` — Sample dashboard screenshot  
-- `[PL_Meets_Processed parquet file](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/PL_Meets_Processed.parquet)` — Cleaned & transformed meets dataset  
-- `[PL_Participants_Processed parquet file](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/PL_Participants_Processed.parquet)` — Cleaned & transformed participants dataset  
+- [Powerlifting EDA Notebook](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/Powerlifting_EDA.ipynb) — Jupyter Notebook with full analysis and visualizations  
+- [Power BI Report](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/Open_Powerlifting_Insights.pdf) — Sample dashboard screenshot  
+- [PL_Meets_Processed parquet file](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/PL_Meets_Processed.parquet) — Cleaned & transformed meets dataset  
+- [PL_Participants_Processed parquet file](https://github.com/jfox1620/Portfolio/blob/main/Powerlifting%20Exploratory%20Analysis/PL_Participants_Processed.parquet) — Cleaned & transformed participants dataset  
 
 ## Dataset
 - Source: [OpenPowerlifting Project](https://www.openpowerlifting.org/)  
