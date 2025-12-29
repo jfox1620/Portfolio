@@ -2,8 +2,7 @@
  * masterpage.js
  * 
  * This script tracks key user interactions on all pages of the Wix site.
- * Events are sent to a Cloud Run endpoint for analytics (page views, navigation clicks,
- * subscribe button submissions, and donate link clicks).
+ * Events are sent to a Cloud Run endpoint for analytics (page views, navigation clicks, subscribe button submissions, and donate link clicks).
  * 
  * Notes:
  * - Only one page view per page per session is sent (pageViewSent flag).
@@ -17,7 +16,7 @@ import wixWindow from 'wix-window';
 // -------------------------------
 // Configuration
 // -------------------------------
-const ENDPOINT_URL = "https://jsg-clickstream-ingest-691849607520.us-west1.run.app"; // Replace with your Cloud Run URL
+const ENDPOINT_URL = "https://jsg-clickstream-ingest-691849607520.us-west1.run.app";
 
 /**
  * Sends a click/event object to the Cloud Run endpoint.
@@ -104,3 +103,4 @@ $w.onReady(() => {
     }
 
 });
+
