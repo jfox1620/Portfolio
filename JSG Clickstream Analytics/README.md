@@ -66,7 +66,7 @@ Analytics & Reporting
 
 - **Website JavaScript (masterpage.js):** client-side code embedded in the website that captures page views, button clicks, and navigation events, then sends them to the ingestion endpoint.
 - **Cloud Run HTTP Endpoint:** serverless ingestion, always available, handles click events.  
-- **Apache Kafka (local via Docker):** decouples ingestion from downstream consumers, supports replay and backpressure; could be replaced by GCP Pub/Sub in production.  
+- **Apache Kafka (local via Docker):** buffer layer that decouples ingestion from downstream consumers, supports replay and backpressure.
 - **MongoDB:** raw, append-only event storage with flexible schema for evolving formats.  
 - **Snowflake:** analytics-ready warehouse optimized for aggregations and reporting.  
 
