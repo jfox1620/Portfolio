@@ -29,7 +29,7 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 ├── ingestion/
 │   └── cloud_run_ingest.py
 ├── kafka/
-│   ├──  docker-compose.yml
+│   ├── docker-compose.yml
 │   ├── create_topics.sh
 │   └── kafka_consumer.py
 ├── nosql/
