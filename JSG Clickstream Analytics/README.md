@@ -29,16 +29,10 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 ├── Cloud Functions/
 │   ├── clickstream_ingest.py
 │   └── pubsub_to_firestore.py
-├── kafka/
-│   ├── docker-compose.yml
-│   ├── create_topics.sh
-│   └── kafka_consumer.py
-├── nosql/
-│   └── mongo_schema.md
-├── warehouse/
-│   ├── snowflake_schema.sql
+├── BigQuery/
+│   ├── schema.sql
 │   └── analytics_queries.sql
-└── website/
+└── Website/
     └── masterpage.js
 
 ```
