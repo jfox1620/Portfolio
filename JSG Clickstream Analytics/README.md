@@ -27,7 +27,7 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 ├── README.md
 ├── architecture.png
 ├── ingestion/
-│   └── cloud_run_ingest.py
+│   └── clickstream_ingest.py
 ├── kafka/
 │   ├── docker-compose.yml
 │   ├── create_topics.sh
