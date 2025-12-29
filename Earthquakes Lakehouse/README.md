@@ -57,7 +57,7 @@ ________________________________________
 
 This project follows the Medallion Architecture widely used in lakehouse systems like Databricks and Delta Lake environments:
 
-<img width="941" height="451" alt="architecture" src="https://github.com/user-attachments/assets/c36b4e0d-128f-4a39-a16a-14ebbc2944fc" />
+<img width="1091" height="631" alt="architecture (1)" src="https://github.com/user-attachments/assets/9f38548b-c532-4f18-bb69-6d9e31c182e4" />
 
 ________________________________________
 
