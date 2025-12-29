@@ -33,3 +33,4 @@ def ingest_event(request):
     # Add CORS header so Wix can receive response
     headers = {"Access-Control-Allow-Origin": "*"}
     return ("OK", 200, headers)
+
