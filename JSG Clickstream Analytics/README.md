@@ -23,23 +23,23 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 ## Repository Structure
 
 ```bash
-/architecture
-    system_architecture.png
-/ingestion
-    cloud_run_ingest.py
-/kafka
-    docker-compose.yml
-    create_topics.sh
-/consumer
-    kafka_consumer.py
-/nosql
-    mongo_schema.md
-/warehouse
-    snowflake_schema.sql
-    analytics_queries.sql
-/wix
-    masterpage.js
-README.md
+/
+├── README.md
+├── architecture.png
+├── ingestion/
+│   └── cloud_run_ingest.py
+├── kafka/
+│   ├──  docker-compose.yml
+│   ├── create_topics.sh
+│   └── kafka_consumer.py
+├── nosql/
+│   └── mongo_schema.md
+├── warehouse/
+│   ├── snowflake_schema.sql
+│   └── analytics_queries.sql
+└── website/
+    └── masterpage.js
+
 ```
 
 ---
