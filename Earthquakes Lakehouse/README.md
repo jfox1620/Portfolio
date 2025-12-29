@@ -29,13 +29,13 @@ ________________________________________
 
 ```bash
 /
-├── notebooks/
+├── Notebooks/
 │   ├── 01_bronze_ingest.py
 │   ├── 02_silver_transform.py
 │   ├── 03_gold_tables.py
 │   ├── generate_map_animation.py
 │
-├── README.md  ← (this file)
+├── README.md
 │── architecture.png
 │── requirements.txt
 └── earthquake_map.html
