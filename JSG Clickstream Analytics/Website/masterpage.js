@@ -89,10 +89,27 @@ $w.onReady(() => {
 			sendClickEvent({
 				event_type: "subscribe_submit",
 				page: currentPage,
-                session_id: sessionId,
+               	session_id: sessionId,
 				timestamp: new Date().toISOString()
 			});
 		});
 	}
+
+    /* -------------------------------
+       DONATE LINK CLICK
+       Tracks clicks on the donate link (#text67)
+    -------------------------------- */
+    const donateText = $w("#text67");
+    
+    if (donateText) {
+        donateText.onClick(() => {
+            sendClickEvent({
+                event_type: "donate_outbound_click",
+                page: currentPage,
+		        session_id: sessionId,
+                timestamp: new Date().toISOString()
+            });
+        });
+    }
 
 });
