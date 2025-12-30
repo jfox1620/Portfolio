@@ -1,21 +1,21 @@
 # JSG Clickstream Analytics
 
-## Overview
+## Project Overview
 
-**JSG Clickstream Analytics** is a real-time clickstream data pipeline designed to capture anonymized user engagement events from a live website. The website belongs to the Christian nonprofit [Jesus Said Go](https://www.jesus-said-go.com), where I volunteer.  
+JSG Clickstream Analytics is a real-time clickstream data pipeline designed to capture anonymized user engagement events from a live website. The website belongs to the Christian nonprofit [Jesus Said Go](https://www.jesus-said-go.com), where I volunteer.
 
 The pipeline streams events through a messaging system, stores raw data in a NoSQL database, and delivers curated analytics in a cloud data warehouse. This project demonstrates real-world data engineering patterns while remaining cost-effective and portfolio-ready.
 
 **Problem Statement & Design Principles:**
 
-Nonprofits often lack tools to understand how users engage with their websites. Clickstream data—including page views, button clicks, and navigation—provides actionable insights for content and outreach.  
-This project addresses that need with a lightweight, privacy-aware pipeline using streaming and cloud-native components.  
+Nonprofits often lack tools to understand how users engage with their websites. Clickstream data, including page views, button clicks, and navigation, provides actionable insights for content and outreach.
+This project addresses that need with a lightweight, privacy-aware pipeline using streaming and cloud-native components.
 
 **Key Principles:**
 
-- Separation of concerns: ingestion, streaming, raw storage, analytics  
-- Cost awareness: free-tier friendly  
-- Privacy by design: no PII collected  
+- Separation of concerns: ingestion, streaming, raw storage, analytics
+- Cost awareness: free-tier friendly
+- Privacy by design: no PII collected
 - Production-inspired architecture: demonstrates multiple layers and trade-offs
 
 ---
@@ -31,16 +31,14 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 │   ├── pubsub_to_firestore.py
 │   └── firestore_to_bigquery.py
 ├── BigQuery/
-│   ├── schema.sql
-│   └── analytics_queries.sql
+│   └── schema.md
 └── Website/
     └── masterpage.js
-
 ```
 
 ---
 
-## Architecture & Technology Stack
+## Architecture
 
 **Data Flow:**
 
@@ -83,12 +81,8 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 
 - No PII is collected
 - No IP addresses, emails, or user identifiers
-- Session IDs are anonymous
 - Data used only for aggregate analytics
 
-**Analytics Use Cases:**
+**Analytics:**
 
-- Page views per day
-- Most visited pages
-- Conversions by page
-- Navigation depth and flows
+[Pending]
