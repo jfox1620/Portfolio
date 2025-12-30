@@ -56,7 +56,7 @@ This project addresses that gap by implementing a lightweight, privacy-aware cli
 - **Pub/Sub (click-events):** Messaging layer that decouples the website ingestion tier from downstream storage and analytics. Provides buffering, fault tolerance, and replay capability while smoothing traffic spikes from client-side event bursts.
 - **Firestore (click_events):** Operational event store for raw clickstream data. Stores individual user interaction events with flexible schema support, low write latency, and strong durability. Acts as an intermediate system between real-time ingestion and batch analytics processing.
 - **BigQuery (clickstream_analytics.click_events):** Central analytics warehouse optimized for querying and reporting. Stores cleaned, structured clickstream events with enforced schema, enabling aggregation, session analysis, funnel tracking, and dashboarding at scale.
-- **Looker Dashboard:** Analytics and visualization layer built on top of BigQuery. Provides key engagement metrics such as sessions, page views, navigation clicks, subscriptions, and outbound donations, along with derived KPIs (e.g., average page views per session) for monitoring user behavior and site performance.
+- **[Looker Dashboard](https://lookerstudio.google.com/u/0/reporting/5357902a-fda9-4f78-a87f-9433cf2d6a0e):** Lightweight analytics and visualization layer built on top of BigQuery data. Presents core engagement metrics such as total sessions, page views, navigation clicks, subscription clicks, and outbound donation clicks, along with derived KPIs (e.g., average page views per session). Designed to provide a clear, high-level view of user behavior and site engagement.
 
 **BigQuery Schema:**
 
