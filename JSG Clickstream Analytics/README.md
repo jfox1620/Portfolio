@@ -30,8 +30,6 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 │   ├── clickstream_ingest.py
 │   ├── pubsub_to_firestore.py
 │   └── firestore_to_bigquery.py
-├── BigQuery/
-│   └── schema.md
 └── Website/
     └── masterpage.js
 ```
