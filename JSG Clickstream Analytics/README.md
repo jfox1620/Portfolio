@@ -2,21 +2,25 @@
 
 ## Project Overview
 
-JSG Clickstream Analytics is a real-time clickstream data pipeline designed to capture anonymized user engagement events from a live website. The website belongs to the Christian nonprofit [Jesus Said Go](https://www.jesus-said-go.com), where I volunteer.
+JSG Clickstream Analytics is a real-time clickstream data pipeline designed to capture anonymized user engagement events from a live production website. The website belongs to the Christian nonprofit [Jesus Said Go](https://www.jesus-said-go.com), where I volunteer, allowing this project to operate on real user traffic rather than synthetic or demo data.
 
-The pipeline streams events through a messaging system, stores raw data in a NoSQL database, and delivers curated analytics in a cloud data warehouse. This project demonstrates real-world data engineering patterns while remaining cost-effective and portfolio-ready.
+The pipeline collects client-side interaction events, streams them through a messaging layer, persists raw events in a NoSQL datastore, and delivers curated, query-optimized analytics to a cloud data warehouse for reporting and visualization. The system is designed to reflect real-world data engineering patterns while remaining cost-effective, serverless, and suitable for a portfolio project.
 
-**Problem Statement & Design Principles:**
+This project emphasizes reliability, scalability, and analytical usefulness over raw volume, demonstrating how modern cloud-native components can be composed into a practical analytics platform.
 
-Nonprofits often lack tools to understand how users engage with their websites. Clickstream data, including page views, button clicks, and navigation, provides actionable insights for content and outreach.
-This project addresses that need with a lightweight, privacy-aware pipeline using streaming and cloud-native components.
+**Problem Statement:**
 
-**Key Principles:**
+Many nonprofits lack visibility into how users interact with their websites beyond basic page view counts. Without structured clickstream data, it is difficult to understand content engagement, navigation behavior, or the effectiveness of calls to action such as subscriptions or donations.
 
-- Separation of concerns: ingestion, streaming, raw storage, analytics
-- Cost awareness: free-tier friendly
-- Privacy by design: no PII collected
-- Production-inspired architecture: demonstrates multiple layers and trade-offs
+This project addresses that gap by implementing a lightweight, privacy-aware clickstream pipeline that captures meaningful interaction data and transforms it into actionable analytics using modern streaming and data warehouse technologies.
+
+**Design Principles:**
+
+- **Separation of concerns** : ingestion, streaming, raw storage, transformation, and analytics are handled by distinct components
+- **Cost awareness** : designed to operate within free-tier or low-cost cloud limits
+- **Privacy by design** : no personally identifiable information (PII) is collected
+- **Production-inspired architecture** : reflects real-world trade-offs in reliability, extensibility, and maintainability
+- **Analytics-first modeling** : events and schema are designed with downstream analysis in mind
 
 ---
 
@@ -42,16 +46,17 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 
 <img width="1211" height="631" alt="architecture" src="https://github.com/user-attachments/assets/baf5057d-078b-4d8d-9921-b2a90c275609" />
 
+
 **Components:**
 
-- **Website JavaScript (masterpage.js):** client-side code embedded in the website that captures page views, button clicks, and navigation events, then sends them to the ingestion endpoint.
-- **Cloud Run Function (clickstream_ingestion.py):** serverless ingestion, always available, handles click events.  
-- **Pub/Sub (click-events):** buffer layer that decouples ingestion from downstream consumers, supports replay and backpressure.
-- **Cloud Run Function (pubsub_to_firestore):** [description needed]
-- **Firestore (click_events):** [description needed]
-- **Cloud Run Function (firestore_to_bigquery):** [description needed]
-- **BigQuery (clickstream_analytics.click_events):** [description needed]
-- **Looker Dashboard:** [description needed]
+- **[Website JavaScript (masterpage.js)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Website/masterpage.js):** Client-side tracking script embedded in the website’s master page. It initializes a session identifier, captures user interactions (page views, navigation clicks, form submissions, and outbound donate clicks), enriches events with page and session context, and sends structured JSON events to the ingestion endpoint.
+- **[Cloud Run Function (clickstream_ingestion.py)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Cloud%20Functions/clickstream_ingestion.py):** Public-facing serverless ingestion service that receives clickstream events from the website, performs lightweight validation and normalization, and publishes events to Pub/Sub. Designed to be highly available, stateless, and horizontally scalable.
+- **[Cloud Run Function (pubsub_to_firestore.py)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Cloud%20Functions/pubsub_to_firestore.py):** Event consumer triggered by Pub/Sub messages. This function persists clickstream events into Firestore, using the Pub/Sub message payload as the source of truth. Firestore serves as a durable, low-latency event store and decouples real-time ingestion from analytical processing.
+- **[Cloud Run Function (firestore_to_bigquery.py)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Cloud%20Functions/firestore_to_bigquery.py):** Batch processing function that extracts recent clickstream events from Firestore, maps and cleans fields, loads data into a BigQuery staging table, and merges into the main analytics table using event_id as a deduplication key. This enables reliable, idempotent ingestion into the analytics warehouse.
+- **Pub/Sub (click-events):** Messaging layer that decouples the website ingestion tier from downstream storage and analytics. Provides buffering, fault tolerance, and replay capability while smoothing traffic spikes from client-side event bursts.
+- **Firestore (click_events):** Operational event store for raw clickstream data. Stores individual user interaction events with flexible schema support, low write latency, and strong durability. Acts as an intermediate system between real-time ingestion and batch analytics processing.
+- **BigQuery (clickstream_analytics.click_events):** Central analytics warehouse optimized for querying and reporting. Stores cleaned, structured clickstream events with enforced schema, enabling aggregation, session analysis, funnel tracking, and dashboarding at scale.
+- **Looker Dashboard:** Analytics and visualization layer built on top of BigQuery. Provides key engagement metrics such as sessions, page views, navigation clicks, subscriptions, and outbound donations, along with derived KPIs (e.g., average page views per session) for monitoring user behavior and site performance.
 
 **BigQuery Schema:**
 
@@ -71,14 +76,18 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 
 ## Event Data Model & Tracking
 
+This project uses an event-based clickstream model designed to capture user engagement while remaining lightweight, privacy-conscious, and analytics-friendly.
+
 **Tracked Events:**
 
-- Page views (page_view)
-- Navigation clicks via menu (navigation_click)
-- Subscribe button clicks (subscribe_submit)
-- Donate link clicks (donate_outbound_click)
+- `page_view` : triggered once per page load to track content engagement
+- `navigation_click` : tracks menu-based navigation between pages
+- `subscribe_submit` : captures subscription form submissions (exists on almost every page)
+- `donate_outbound_click` : tracks outbound clicks to the external donation platform (exists on a single page)
 
-**Example click event:**
+Each event is enriched with session context and page-level metadata to enable session analysis and funnel-style reporting in BigQuery.
+
+**Example Event Payload:**
 
 ```json
 {
@@ -91,6 +100,6 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 
 **Privacy Considerations:**
 
-- No PII is collected
-- No IP addresses, emails, or user identifiers
-- Data used only for aggregate analytics
+- No personally identifiable information (PII) is collected
+- No IP addresses, emails, cookies, or persistent user identifiers
+- All analytics are performed at an aggregate level for site engagement insights
