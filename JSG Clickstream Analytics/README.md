@@ -28,7 +28,8 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 ├── architecture.png
 ├── Cloud Functions/
 │   ├── clickstream_ingest.py
-│   └── pubsub_to_firestore.py
+│   ├── pubsub_to_firestore.py
+│   └── firestore_to_bigquery.py
 ├── BigQuery/
 │   ├── schema.sql
 │   └── analytics_queries.sql
@@ -43,31 +44,18 @@ This project addresses that need with a lightweight, privacy-aware pipeline usin
 
 **Data Flow:**
 
-```
-Wix Website (masterpage.js tracking)
-↓
-GCP Cloud Run HTTP Endpoint
-↓
-Kafka (Streaming)
-↓
-MongoDB (Raw Event Storage)
-↓
-Snowflake (Analytics Warehouse)
-↓
-Analytics & Reporting
-```
+<img width="1211" height="631" alt="architecture" src="https://github.com/user-attachments/assets/baf5057d-078b-4d8d-9921-b2a90c275609" />
 
 **Components:**
 
 - **Website JavaScript (masterpage.js):** client-side code embedded in the website that captures page views, button clicks, and navigation events, then sends them to the ingestion endpoint.
-- **Cloud Run HTTP Endpoint:** serverless ingestion, always available, handles click events.  
-- **Apache Kafka (local via Docker):** buffer layer that decouples ingestion from downstream consumers, supports replay and backpressure.
-- **MongoDB:** raw, append-only event storage with flexible schema for evolving formats.  
-- **Snowflake:** analytics-ready warehouse optimized for aggregations and reporting.  
-
-**Hybrid Architecture Rationale:**  
-
-Using multiple technologies highlights **architectural decision-making**: each layer chosen for workload characteristics rather than vendor consolidation.
+- **Cloud Run Function (clickstream_ingestion.py):** serverless ingestion, always available, handles click events.  
+- **Pub/Sub (click-events):** buffer layer that decouples ingestion from downstream consumers, supports replay and backpressure.
+- **Cloud Run Function (pubsub_to_firestore):** [description needed]
+- **Firestore (click_events):** [description needed]
+- **Cloud Run Function (firestore_to_bigquery):** [description needed]
+- **BigQuery (clickstream_analytics.click_events):** [description needed]
+- **Looker Dashboard:** [description needed]
 
 ---
 
@@ -80,11 +68,12 @@ Using multiple technologies highlights **architectural decision-making**: each l
 - Subscribe button clicks (subscribe_submit)
 - Donate link clicks (donate_outbound_click)
 
-**Example anonymized click event:**
+**Example click event:**
 
 ```json
 {
 "event_type": "page_view",
+"session_id": "62995dbb-fb5e-411d-b6ca-78fb71e87a84",
 "page": "/donations",
 "timestamp": "2025-12-29T17:59:42.182Z"
 }
