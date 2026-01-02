@@ -108,7 +108,7 @@ Each event is enriched with session context and page-level metadata to enable se
 
 Planned future enhancements aim to improve structure, analysis, and data reliability for the pipeline.
 
-**Heartbeat events** – Track user activity more precisely to measure time spent on pages and overall session duration.
-**Referrer information** – Capture where traffic is coming from to better understand user sources and navigation paths.
-**Logging** – Implement structured logging for easier debugging, monitoring, and auditing of pipeline processes.
-**Data quality checks & alerts** – Automatically detect anomalies or missing data and create notifications of any failures or data abnormalities.
+- **Heartbeat events** – Track user activity more precisely to measure time spent on pages and overall session duration.
+- **Referrer information** – Capture where traffic is coming from to better understand user sources and navigation paths.
+- **Logging** – Implement structured logging for easier debugging, monitoring, and auditing of pipeline processes.
+- **Data quality checks & alerts** – Automatically detect anomalies or missing data and create notifications of any failures or data abnormalities.
