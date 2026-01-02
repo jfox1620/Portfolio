@@ -16,11 +16,11 @@ This project addresses that gap by implementing a lightweight, privacy-aware cli
 
 **Design Principles:**
 
-- **Separation of concerns** : ingestion, streaming, raw storage, transformation, and analytics are handled by distinct components
-- **Cost awareness** : designed to operate within free-tier or low-cost cloud limits
-- **Privacy by design** : no personally identifiable information (PII) is collected
-- **Production-inspired architecture** : reflects real-world trade-offs in reliability, extensibility, and maintainability
-- **Analytics-first modeling** : events and schema are designed with downstream analysis in mind
+- **Separation of concerns** - ingestion, streaming, raw storage, transformation, and analytics are handled by distinct components
+- **Cost awareness** - designed to operate within free-tier or low-cost cloud limits
+- **Privacy by design** - no personally identifiable information (PII) is collected
+- **Production-inspired architecture** - reflects real-world trade-offs in reliability, extensibility, and maintainability
+- **Analytics-first modeling** - events and schema are designed with downstream analysis in mind
 
 ---
 
@@ -44,14 +44,14 @@ This project addresses that gap by implementing a lightweight, privacy-aware cli
 
 **Data Flow:**
 
-<img width="1211" height="631" alt="architecture" src="https://github.com/user-attachments/assets/baf5057d-078b-4d8d-9921-b2a90c275609" />
+<img width="1231" height="631" alt="architecture" src="https://github.com/user-attachments/assets/a5074592-5037-4bac-ad99-1ea2f72b0924" />
 
 
 **Components:**
 
 - **[Website JavaScript (masterpage.js)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Website/masterpage.js):** Client-side tracking script embedded in the website’s master page. It initializes a session identifier, captures user interactions (page views, navigation clicks, form submissions, and outbound donate clicks), enriches events with page and session context, and sends structured JSON events to the ingestion endpoint.
-- **[Cloud Run Function (clickstream_ingest.py)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Cloud%20Functions/clickstream_ingest.py):** Public-facing serverless ingestion service that receives clickstream events from the website, performs lightweight validation and normalization, and publishes events to Pub/Sub. Designed to be highly available, stateless, and horizontally scalable.
-- **[Cloud Run Function (pubsub_to_firestore.py)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Cloud%20Functions/pubsub_to_firestore.py):** Event consumer triggered by Pub/Sub messages. This function persists clickstream events into Firestore, using the Pub/Sub message payload as the source of truth. Firestore serves as a durable, low-latency event store and decouples real-time ingestion from analytical processing.
+- **[Cloud Run Function (clickstream_ingest.py)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Cloud%20Functions/clickstream_ingest.py):** Public-facing serverless ingestion service that receives clickstream events from the website, performs lightweight validation, and publishes events to Pub/Sub. Designed to be highly available and stateless.
+- **[Cloud Run Function (pubsub_to_firestore.py)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Cloud%20Functions/pubsub_to_firestore.py):** Event consumer triggered by Pub/Sub messages. This function persists clickstream events into Firestore, using the Pub/Sub message payload as the source of truth. Firestore serves as a durable, low-latency event store.
 - **[Cloud Run Function (firestore_to_bigquery.py)](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/Cloud%20Functions/firestore_to_bigquery.py):** Batch processing function that extracts recent clickstream events from Firestore, maps and cleans fields, loads data into a BigQuery staging table, and merges into the main analytics table using event_id as a deduplication key. This enables reliable, idempotent ingestion into the analytics warehouse. Runs daily via Cloud Scheduler.
 - **Pub/Sub (click-events):** Messaging layer that decouples the website ingestion tier from downstream storage and analytics. Provides buffering, fault tolerance, and replay capability while smoothing traffic spikes from client-side event bursts.
 - **Firestore (click_events):** Operational event store for raw clickstream data. Stores individual user interaction events with flexible schema support, low write latency, and strong durability. Acts as an intermediate system between real-time ingestion and batch analytics processing.
@@ -103,3 +103,12 @@ Each event is enriched with session context and page-level metadata to enable se
 - No personally identifiable information (PII) is collected
 - No IP addresses, emails, cookies, or persistent user identifiers
 - All analytics are performed at an aggregate level for site engagement insights
+
+## Future Enhancements
+
+Planned future enhancements aim to improve structure, analysis, and data reliability for the pipeline.
+
+**Heartbeat events** – Track user activity more precisely to measure time spent on pages and overall session duration.
+**Referrer information** – Capture where traffic is coming from to better understand user sources and navigation paths.
+**Logging** – Implement structured logging for easier debugging, monitoring, and auditing of pipeline processes.
+**Data quality checks & alerts** – Automatically detect anomalies or missing data and create notifications of any failures or data abnormalities.
