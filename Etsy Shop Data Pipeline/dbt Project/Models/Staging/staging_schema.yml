@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: receipts
+    description: "Raw receipt data from Etsy API"
+
+    columns:
+      - name: receipt_id
+        description: "Primary key for receipt"
+        tests:
+          - not_null
+          - unique
+
+      - name: buyer_user_id
+        description: "Etsy buyer user id"
+        tests:
+          - not_null
+
+      - name: created_timestamp
+        description: "Timestamp when order was placed"
+        tests:
+          - not_null
+
+      - name: total_price
+        description: "Total price charged to customer"
+        tests:
+          - not_null
