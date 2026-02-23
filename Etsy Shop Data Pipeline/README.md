@@ -52,10 +52,10 @@ This project was built using modern data engineering best practices:
 ```bash
 /
 ├── README.md
-├── architecture.png
+├── Architecture.png
 │
-├── aws_lambda/
-│   ├── etsy_ingestion.py
+├── AWS_Lambda/
+│   ├── etsy_gelato_ingest.py
 │
 ├── dbt_project/
 │   ├── dbt_project.yml
