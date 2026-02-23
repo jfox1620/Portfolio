@@ -4,17 +4,7 @@
 This project is a fully cloud-native end-to-end ELT data pipeline that ingests e-commerce transactional data from the Etsy and Gelato APIs using AWS Lambda, persists it in S3, loads it into Snowflake, and transforms it into a production-style dimensional model using dbt.
 Etsy is an online e-commerce marketplace where I sell framed and unframed artwork, and Gelato is my print-on-demand fulfillment partner that produces and ships the physical products directly to customers after an order is placed.
 
-The pipeline demonstrates:
-+ Event-driven API ingestion
-+ Incremental data extraction
-+ Cloud object storage (S3)
-+ Automated warehouse ingestion (Snowpipe)
-+ dbt-based transformations
-+ Star schema modeling
-+ Data quality testing
-+ Task-based orchestration inside Snowflake
-
-The goal is to simulate a real-world analytics engineering architecture with separation of raw, staging, and analytics layers.
+The goal is to simulate a real-world analytics engineering architecture with separation of raw and clean analytics layers.
 
 
 ## Repository Structure
