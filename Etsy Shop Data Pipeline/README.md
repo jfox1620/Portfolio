@@ -80,7 +80,8 @@ This project was built using modern data engineering best practices:
 │   │
 │   ├── tests/
 │   │   ├── shipped_with_timestamp.sql
-│   │   └── custom_tests.sql
+│   │   ├── fulfilled_orders_have_cost_data.sql
+│   │   └── revenue_not_negative.sql
 │   │
 │   ├── macros/
 │   │   └── generate_schema_name.sql
