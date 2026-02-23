@@ -2,11 +2,48 @@
 
 ## Project Overview
 This project is a fully cloud-native end-to-end ELT data pipeline that ingests e-commerce transactional data from the Etsy and Gelato APIs using AWS Lambda, persists it in S3, loads it into Snowflake, and transforms it into a production-style dimensional model using dbt.
+
 Etsy is an online e-commerce marketplace where I sell framed and unframed artwork, and Gelato is my print-on-demand fulfillment partner that produces and ships the physical products directly to customers after an order is placed.
 
 The goal is to simulate a real-world analytics engineering architecture with separation of raw and clean analytics layers.
 
+This project was built using modern data engineering best practices:
 
+**ELT Architecture:**
+- Transformation occurs inside Snowflake after raw ingestion.
+
+**Separation of Concerns:**
+- Raw ingestion isolated from transformation
+- Staging isolated from analytics
+- Clear layer boundaries
+
+**Incremental API Extraction:**
+- Lambda pulls only new records using timestamp logic
+- Prevents reprocessing historical data
+
+**Star Schema Modeling:**
+- Fact tables at business event grain
+- Conformed dimensions
+- Optimized for BI tools
+
+**Snowflake-Native Ingestion:**
+- External stage
+- Snowpipe
+- Automated loading
+
+**dbt Best Practices:**
+- ref() for dependency management
+- Schema-based layering
+- Generic tests (not_null, unique, relationships)
+- Custom business logic tests
+- Orchestrated builds via Snowflake Task
+
+**Data Quality Enforcement:**
+- Referential integrity checks
+- Business rule validation
+- Pipeline-level validation via dbt build
+
+  
 ## Repository Structure
 
 ```bash
@@ -48,6 +85,7 @@ The goal is to simulate a real-world analytics engineering architecture with sep
 
 ## Architecture & Data Flow
 
+**Diagram:**
 ```bash
 Etsy API      Gelato API
      │             │
@@ -76,26 +114,31 @@ dbt Dimensions & Facts (analytics schema)
 Snowflake Tasks (scheduled dbt build)
 ```
 
+**Components:**
+TBD
+
 ### Snowflake Data Model
 
 This data model was designed using a star schema because it optimizes analytical performance, simplifies querying for BI tools, and clearly separates business events (facts) from descriptive attributes (dimensions), enabling scalable and intuitive reporting.
 
+ERD Diagram TBD
+
 **Fact Tables:**
-- fact_orders
+- `fact_orders`
   + Grain: 1 row per receipt (order-level)
   + Contains revenue metrics
   + Contains fulfillment cost metrics
   + Includes calculated profit fields
-- fact_transactions
+- `fact_transactions`
   + Grain: 1 row per line item (transaction-level)
   + Contains unit price and quantity
   + Enables product-level performance analysis
   + Linked to orders via receipt_id 
 
 **Dimension Tables:**
-- dim_customers
+- `dim_customers`
   + 1 row per buyer
-- dim_products
+- `dim_products`
   + 1 row per SKU/listing
   + Includes size, thickness, frame, product type
 
@@ -108,45 +151,6 @@ This data model was designed using a star schema because it optimizes analytical
 | Facts      | ANALYTICS  | Tables            |
 
 DBT project object is deployed inside Snowflake and executed via Task scheduling.
-
-
-## Design Principles & Concepts
-
-This project was built using modern data engineering best practices:
-
-**ELT Architecture:**
-- Transformation occurs inside Snowflake after raw ingestion.
-
-**Separation of Concerns:**
-- Raw ingestion isolated from transformation
-- Staging isolated from analytics
-- Clear layer boundaries
-
-**Incremental API Extraction:**
-- Lambda pulls only new records using timestamp logic
-- Prevents reprocessing historical data
-
-**Star Schema Modeling:**
-- Fact tables at business event grain
-- Conformed dimensions
-- Optimized for BI tools
-
-**Snowflake-Native Ingestion:**
-- External stage
-- Snowpipe
-- Automated loading
-
-**dbt Best Practices:**
-- ref() for dependency management
-- Schema-based layering
-- Generic tests (not_null, unique, relationships)
-- Custom business logic tests
-- Orchestrated builds via Snowflake Task
-
-**Data Quality Enforcement:**
-- Referential integrity checks
-- Business rule validation
-- Pipeline-level validation via dbt build
 
 
 ## Future Enhancements
