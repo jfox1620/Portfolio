@@ -3,6 +3,10 @@
 ---
 This repository is a portfolio of data analytics projects I've completed to serve as a showcase of my skills.
 
+### [Etsy Shop Data Pipeline](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/README.md)
+
+This project is an end-to-end ELT pipeline that extracts receipts, transactions, and fulfillment data from my Etsy shop and Gelato print-on-demand accounts via their APIs and loads the raw JSON into Amazon S3 using AWS Lambda. The data is automatically ingested into Snowflake using Snowpipe, where it is transformed with dbt into a structured, analytics-ready star schema consisting of fact and dimension tables. The pipeline follows modern cloud data engineering best practices: raw data is preserved in a partitioned S3 data lake, transformations occur inside the warehouse (ELT pattern), and data quality is enforced through dbt tests.
+
 ### [JSG Clickstream Analytics](https://github.com/jfox1620/Portfolio/blob/main/JSG%20Clickstream%20Analytics/README.md)
 
 This project is a real-time data pipeline that captures anonymized user interactions on a nonprofit website and streams them through Apache Kafka for downstream processing. It demonstrates hybrid cloud architecture with serverless ingestion, NoSQL storage, and a cloud data warehouse, built as a production-ready system.
@@ -10,10 +14,6 @@ This project is a real-time data pipeline that captures anonymized user interact
 ### [USGS Earthquakes Lakehouse Pipeline](https://github.com/jfox1620/Portfolio/blob/main/Earthquakes%20Lakehouse/README.md)
 
 This project demonstrates a full production-grade lakehouse pipeline using PySpark and Delta Lake in Databricks. It ingests real-time earthquake data from the USGS API, lands the raw JSON into a structured Bronze-Silver-Gold architecture, and produces analytical tables suitable for dashboards, reporting, and machine learning. Also includes generation of an interactive visualization that displays earthquake locations over time.
-
-### [Etsy Shop Data Pipeline](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/README.md)
-
-This project is an end-to-end ETL pipeline that pulls receipts, transactions, and fulfillment data from my Etsy shop and Gelato print-on-demand accounts via APIs and loads them into Databricks SQL. It normalizes complex JSON into analytics-ready tables and performs full table replacement for consistent, deterministic outputs. The pipeline showcases production-style engineering practices: including modular design, clear task boundaries, and robust documentation while running entirely in Databricks Community Edition, wherein it is run on a daily job schedule to keep data up-to-date and available for analytics.
 
 ### [AB109 Annual Evaluation Report](https://github.com/jfox1620/Portfolio/blob/main/Reports/2023-2024%20Annual%20Evaluation%20Report%20AB109.pdf)
 
