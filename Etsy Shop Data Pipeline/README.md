@@ -7,44 +7,33 @@ Etsy is an online e-commerce marketplace where I sell framed and unframed artwor
 
 The goal is to simulate a real-world analytics engineering architecture with separation of raw and clean analytics layers.
 
+### Design Principles & Concepts
+
 This project was built using modern data engineering best practices:
 
 **ELT Architecture:**
-- Transformation occurs inside Snowflake after raw ingestion.
+All transformations occur inside Snowflake after raw ingestion into cloud storage. This leverages the warehouse for scalable compute while preserving raw source data in its original form.
 
 **Separation of Concerns:**
-- Raw ingestion isolated from transformation
-- Staging isolated from analytics
-- Clear layer boundaries
+The system enforces clear layer boundaries between raw ingestion, staging transformations, and analytics modeling, ensuring modularity, maintainability, and logical data flow.
 
 **Incremental API Extraction:**
-- Lambda pulls only new records using timestamp logic
-- Prevents reprocessing historical data
+AWS Lambda retrieves only new or updated records using timestamp-based logic, preventing unnecessary reprocessing and enabling efficient daily updates.
 
 **Data Lake Partitioning Strategy:**
-- Partitioned folder structure by API source and ingestion date.
+Raw JSON files are stored in Amazon S3 using a partitioned folder structure organized by API source and ingestion date, supporting scalable storage and targeted reprocessing.
 
 **Star Schema Modeling:**
-- Fact tables at business event grain
-- Conformed dimensions
-- Optimized for BI tools
+Data is modeled using a dimensional star schema with fact tables at defined business-event grains and conformed dimensions, optimizing performance and usability for analytical workloads.
 
 **Snowflake-Native Ingestion:**
-- External stage
-- Snowpipe
-- Automated loading
+An external stage and Snowpipe automate continuous file ingestion from S3 into Snowflake raw tables, creating a fully managed, event-driven loading process.
 
 **dbt Best Practices:**
-- ref() for dependency management
-- Schema-based layering
-- Generic tests (not_null, unique, relationships)
-- Custom business logic tests
-- Orchestrated builds via Snowflake Task
+dbt is used for dependency-aware transformations via ref(), schema-based model organization, and automated execution through Snowflake Tasks, with both generic and custom tests enforcing model integrity.
 
 **Data Quality Enforcement:**
-- Referential integrity checks
-- Business rule validation
-- Pipeline-level validation via dbt build
+Data integrity is validated through referential checks, business-rule tests, and pipeline-level validation executed as part of dbt build, ensuring reliable analytical outputs.
 
   
 ## Repository Structure
