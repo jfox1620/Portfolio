@@ -23,11 +23,11 @@ AWS Lambda retrieves only new or updated records using timestamp-based logic, pr
 **Data Lake Partitioning Strategy:**
 Raw JSON files are stored in Amazon S3 using a partitioned folder structure organized by API source and ingestion date, supporting scalable storage and targeted reprocessing.
 
-**Star Schema Modeling:**
-Data is modeled using a dimensional star schema with fact tables at defined business-event grains and conformed dimensions, optimizing performance and usability for analytical workloads.
-
 **Snowflake-Native Ingestion:**
 An external stage and Snowpipe automate continuous file ingestion from S3 into Snowflake raw tables, creating a fully managed, event-driven loading process.
+
+**Star Schema Modeling:**
+Data is modeled using a dimensional star schema with fact tables at defined business-event grains and conformed dimensions, optimizing performance and usability for analytical workloads.
 
 **dbt Best Practices:**
 dbt is used for dependency-aware transformations via ref(), schema-based model organization, and automated execution through Snowflake Tasks, with both generic and custom tests enforcing model integrity.
@@ -41,7 +41,6 @@ Data integrity is validated through referential checks, business-rule tests, and
 ```bash
 /
 ├── README.md
-├── Architecture.png
 │
 ├── AWS_Lambda/
 │   ├── etsy_gelato_ingest.py
@@ -84,7 +83,7 @@ Data integrity is validated through referential checks, business-rule tests, and
 
 **Components:**
 - *Sources (API):* The system begins with two external data sources: the Etsy API and the Gelato API. Etsy provides marketplace transaction data including orders, customers, product details, pricing, and financial information. Gelato provides fulfillment data such as production costs, shipping status, taxes, and order completion details. Together, these APIs supply both revenue-side and cost-side data necessary for full profitability analysis.
-- *AWS Lambda (Daily Trigger):* An [AWS Lambda function](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/AWS_Lambda/etsy_gelato_ingest.py) runs on a scheduled daily trigger via Cloudwatch to extract incremental data from both APIs. The function uses last-run timestamps to ensure only new or updated records are retrieved, preventing duplicate processing. After extraction, the Lambda function writes the raw JSON responses to Amazon S3. This design enables automated, event-driven ingestion without manual intervention.
+- *AWS Lambda (Daily Trigger):* An [AWS Lambda function](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/AWS_Lambda/etsy_gelato_ingest.py) runs on a scheduled daily trigger via Cloudwatch to extract incremental data from both APIs. For dependencies, the function uses appropriate layers, including a publicly available ARN (Klayers). The function uses last-run timestamps to ensure only new or updated records are retrieved, preventing duplicate processing. After extraction, the Lambda function writes the raw JSON responses to Amazon S3. This design enables automated, event-driven ingestion without manual intervention.
 - *AWS S3 (Partitioned Data Lake):* All raw API responses are stored in Amazon S3 using a partitioned folder structure, organized by soruce type and ingestion date. This partitioning strategy improves scalability, simplifies incremental processing, and allows for targeted reprocessing of specific time periods. S3 serves as the durable raw data layer and preserves the full original payload for traceability, auditing, and potential re-ingestion.
 - *Snowflake (Ingestion via Snowpipe):* Snowflake connects to the S3 bucket using an external stage and Snowpipe. Snowpipe automatically detects newly added JSON files and separates them into raw Snowflake tables, adding on metadata (source file name and ingestion timestamp). This provides continuous, fully automated ingestion directly into the data warehouse without requiring manual loads or external ETL jobs.
 - *dbt Models:* dbt is used to flatten and transform the raw JSON data into structured analytical tables inside Snowflake. The [staging layer](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/dbt%20Project/Models/Staging/) flattens and standardizes (which includes type casting) the raw data into clean views. From there, a star schema is built consisting of [fact tables](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/dbt%20Project/Models/Facts/) and [dimension tables](https://github.com/jfox1620/Portfolio/blob/main/Etsy%20Shop%20Data%20Pipeline/dbt%20Project/Models/Dimensions/) within the analytics schema. This design separates business events (facts) from descriptive attributes (dimensions), enabling efficient analytical queries and scalable reporting. Both models and tests are run on a schedule via a Snowflake task.
