@@ -78,7 +78,7 @@ Data integrity is validated through referential checks, business-rule tests, and
 
 ## Architecture & Data Flow
 
-**Diagram:**
+**Data Flow Diagram:**
 
 <img width="794" height="391" alt="TrueFormDesignsELTFlow" src="https://github.com/user-attachments/assets/f12ac938-cd41-4a7b-925b-87bd552109b0" />
 
@@ -94,7 +94,10 @@ Data integrity is validated through referential checks, business-rule tests, and
 
 This data model was designed using a star schema because it optimizes analytical performance, simplifies querying for BI tools, and clearly separates business events (facts) from descriptive attributes (dimensions), enabling scalable and intuitive reporting.
 
-ERD Diagram TBD
+**ERD:**
+
+<img width="1515" height="824" alt="TRUE_FORM_DESIGNS ANALYTICS ERD" src="https://github.com/user-attachments/assets/17c0055e-ef08-4410-b5e7-c2158c553ed6" />
+
 
 **Fact Tables:**
 - `fact_orders`
