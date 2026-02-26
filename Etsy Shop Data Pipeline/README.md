@@ -79,33 +79,8 @@ Data integrity is validated through referential checks, business-rule tests, and
 ## Architecture & Data Flow
 
 **Diagram:**
-```bash
-Etsy API      Gelato API
-     │             │
-     ▼             ▼
-AWS Lambda (daily incremental extraction)
-     │
-     ▼
-Amazon S3 (partitioned raw JSON storage)
-     │
-     ▼
-Snowflake External Stage
-     │
-     ▼
-Snowpipe
-     │
-     ▼
-Raw Tables (receipts, transactions, fulfillments)
-     │
-     ▼
-dbt Staging Models (views)
-     │
-     ▼
-dbt Dimensions & Facts (analytics schema)
-     │
-     ▼
-Snowflake Tasks (scheduled dbt build)
-```
+
+<img width="794" height="391" alt="TrueFormDesignsELTFlow" src="https://github.com/user-attachments/assets/f12ac938-cd41-4a7b-925b-87bd552109b0" />
 
 **Components:**
 - *Sources (API):* The system begins with two external data sources: the Etsy API and the Gelato API. Etsy provides marketplace transaction data including orders, customers, product details, pricing, and financial information. Gelato provides fulfillment data such as production costs, shipping status, taxes, and order completion details. Together, these APIs supply both revenue-side and cost-side data necessary for full profitability analysis.
