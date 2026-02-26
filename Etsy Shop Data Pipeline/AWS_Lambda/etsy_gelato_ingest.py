@@ -79,8 +79,6 @@ from datetime import timedelta, datetime, timezone
 # FUNCTIONS
 # -------------------------------
 
-import boto3
-
 def load_secrets(parameter_names: list, region_name: str = "us-west-1", ssm_client=None) -> dict:
     """
     Load a list of secrets or parameters from AWS SSM Parameter Store.
@@ -552,4 +550,5 @@ def etsy_gelato_pipeline():
                 Overwrite=True
             )
         except Exception as e:
+
             print(f"Failed to update last successful run in SSM: {e}")
